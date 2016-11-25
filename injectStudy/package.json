@@ -1,0 +1,20 @@
+{
+  "name": "gulp_inject_study",
+  "version": "1.0.0",
+  "description": "just test",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-inject-string": "^1.1.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "RosApr"
+  ],
+  "author": "RosApr",
+  "license": "ISC"
+}

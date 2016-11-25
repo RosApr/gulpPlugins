@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>gulp rem2px demo</title>
+	<link rel="stylesheet" href="./assets/css/index.css">
+</head>
+<body>
+	<h1>gulp-rem2px</h1>
+	<em>该插件配合js flexible</em>	
+	<em>step1: npm install</em>
+	<em>运行demo 根目录下 run: gulp less</em>
+	<h4>基于node gulp</h4>
+	<p>this plugin used based on <strong>gulp-postcss</strong>, <strong>px2rem</strong>, <strong>postcss-px2rem</strong></p>
+	<div>
+	"use strict"
+	<br>
+	var gulp = require("gulp"),
+	<br>
+    less = require("gulp-less"),
+    <br>
+    minifycss = require("gulp-minify-css"),
+    <br>
+    autoprefixer = require("gulp-autoprefixer"),
+    <br>
+    postcss = require("gulp-postcss"),
+    <br>
+    px2rem = require("postcss-px2rem"),
+    <br>
+    <strong>remUnit 设置转换的基准值,200 /75 活或者  200 / 60</strong>
+    <br>
+    processors = [px2rem({remUnit: 75})];
+    <br>
+    gulp.task("less", function(){
+    <br>
+        gulp.src("less/*.less")
+        <br>
+            .pipe(less())
+            <br>
+            .pipe(postcss(processors))
+            <br>
+            .pipe(minifycss())
+            <br>
+            .pipe(autoprefixer({
+            <br>
+              browsers: ["last 2 versions", "Android >= 4.0"],
+              <br>
+              cascade: true,
+              <br>
+              remove: true
+              <br>
+            }))
+            <br>
+            .pipe(gulp.dest("assets/css"))
+            <br>
+    });
+    <br>
+	</div>
+	<p>
+		less 或者 sass文件内，
+	</p>
+	<p>注释必须用/**/</p>
+	<p>border 带有/*no*/ 则不进行转换</p>
+	<p>font-size 带有/*px*/ 则会根据页面dpr进行兼容性处理</p>
+
+	<p>demo:</p>
+	<p>less:</p>
+	<p>p {
+	backgrpund:red;
+	font-size: 50px;
+}
+div {
+	border: 1px solid red; /*no*/
+}
+h1 {
+	font-size: 20px;/*px*/
+}</p>
+<p>css:</p>
+<p>
+	p {
+  backgrpund: red;
+  font-size: 0.666667rem;
+}
+
+div {
+  border: 1px solid red;
+}
+
+[data-dpr="1"] h1 {
+  font-size: 10px;
+}
+
+[data-dpr="2"] h1 {
+  font-size: 20px;
+}
+
+[data-dpr="3"] h1 {
+  font-size: 30px;
+}
+</p>
+</body>
+</html>
